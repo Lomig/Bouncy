@@ -15,6 +15,8 @@ var falling
 var jump_after_bounce
 var jumping
 
+var last_collide_was_wall
+
 var key_registered
 var move_direction
 
@@ -94,6 +96,12 @@ func collide(collision):
 	if !collision.collider.name == "SolidWall":
 		global_position.x = round(collision.collider.global_position.x)
 
+	# Bouncing from a wall may prevent the tilting animation to finish
+	# Finishing it early if we hit a wall
+	if last_collide_was_wall:
+		collision.collider.get_parent().reset()
+		last_collide_was_wall = false
+
 	# If we collide with the floor while idle, bounce!
 	if collision.collider.name == "BodyTop" and !key_registered and !jump_after_bounce:
 		$AudioBounce.play()
@@ -110,6 +118,7 @@ func collide(collision):
 		move = true
 	# Bounce of the wall
 	elif collision.collider.name == "SolidWall":
+		last_collide_was_wall = true
 		wall = true
 	# Bounce of the roof
 	elif collision.collider.name == "BodyBottom":
