@@ -9,7 +9,10 @@ var velocity
 var bounce
 var move
 var wall
+var roof
 var falling
+var jump_after_bounce
+var jump
 
 var collision
 
@@ -24,7 +27,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	if bounce:
-		# velocity = - velocity -- Does not work, collision not precise enough it seems
+		# velocity = - velocity -- Does not work, Bouncy keeps bouncing higher than previously
 		velocity = Vector2(0, -1000)
 		bounce = false
 	elif move:
@@ -35,12 +38,20 @@ func _physics_process(delta):
 		velocity.y = - direction * sin(THETA)
 		move = false
 	elif wall:
+		# velocity = - velocity -- Same issue, Bouncy goes too far
 		velocity = - 0.79 * velocity
 		wall = false
 	elif falling:
 		velocity.x = 0
 		falling = false
-		
+	elif roof:
+		velocity = acceleration
+		roof = false
+
+	if jump && velocity.y < 0:
+		acceleration.y = - abs(acceleration.y)
+	else:
+		acceleration.y = abs(acceleration.y)
 
 	collision = move_and_collide(velocity * delta)
 	velocity += acceleration * delta
@@ -58,19 +69,32 @@ func _input(event):
 	elif event.is_action("ui_right") && !event.is_action_released("ui_right"):
 		move_direction = 1
 		key_registered = true
+	elif event.is_action_pressed("ui_accept"):
+		jump_after_bounce = true
+	elif event.is_action_released("ui_accept"):
+		jump_after_bounce = false
+		jump = false
 	elif event.is_action_pressed("ui_up"):
 		print(global_position)
 
 func collide():
-	if collision.collider.name == "BodyTop" and !key_registered:
-		global_position.x = round(global_position.x)
+	global_position.x = round(global_position.x)
+	
+	if collision.collider.name == "BodyTop" and !key_registered and !jump_after_bounce:
 		bounce = true
+	elif collision.collider.name == "BodyTop" and !key_registered and jump_after_bounce:
+		jump_after_bounce = false
+		jump = true
 	elif collision.collider.name == "BodyTop" and key_registered:
-		global_position.x = round(global_position.x)
 		move = true
 		key_registered = false
 	elif collision.collider.name == "SolidWall":
 		wall = true
+	elif collision.collider.name == "BodyBottom":
+		if jump:
+			jump = false
+			jump_after_bounce = true
+		roof = true
 
 func fall(center):
 	global_position.x = round(center)
