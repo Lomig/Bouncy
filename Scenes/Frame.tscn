@@ -1,0 +1,78 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/NormalFloor.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/SolidWall.tscn" type="PackedScene" id=2]
+
+[node name="Frame" type="Node2D"]
+
+[node name="NormalFloor" parent="." instance=ExtResource( 1 )]
+position = Vector2( 90, 0 )
+scale = Vector2( 0.744186, 0.8 )
+
+[node name="NormalFloor2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 270, 0 )
+scale = Vector2( 0.744186, 0.8 )
+
+[node name="NormalFloor3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 450, 0 )
+scale = Vector2( 0.744186, 0.8 )
+
+[node name="NormalFloor4" parent="." instance=ExtResource( 1 )]
+position = Vector2( 630, 0 )
+scale = Vector2( 0.744186, 0.8 )
+
+[node name="NormalFloor5" parent="." instance=ExtResource( 1 )]
+position = Vector2( 810, 0 )
+scale = Vector2( 0.744186, 0.8 )
+
+[node name="NormalFloor6" parent="." instance=ExtResource( 1 )]
+position = Vector2( 990, 0 )
+scale = Vector2( 0.744186, 0.8 )
+
+[node name="SolidWall" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1.25005, 90 )
+scale = Vector2( 0.825581, 0.744186 )
+
+[node name="SolidWall2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1.25005, 270 )
+scale = Vector2( 0.825581, 0.744186 )
+
+[node name="SolidWall3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1.25005, 450 )
+scale = Vector2( 0.825581, 0.744186 )
+
+[node name="SolidWall4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1.25004, 630 )
+scale = Vector2( 0.825581, 0.744186 )
+
+[node name="SolidWall5" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1.25005, 810 )
+scale = Vector2( 0.825581, 0.744186 )
+
+[node name="SolidWall6" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1.25005, 990 )
+scale = Vector2( 0.825581, 0.744186 )
+
+[node name="SolidWall7" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1080, 90 )
+scale = Vector2( 0.825581, 0.744186 )
+
+[node name="SolidWall8" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1080, 270 )
+scale = Vector2( 0.825581, 0.744186 )
+
+[node name="SolidWall9" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1080, 450 )
+scale = Vector2( 0.825581, 0.744186 )
+
+[node name="SolidWall10" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1080, 630 )
+scale = Vector2( 0.825581, 0.744186 )
+
+[node name="SolidWall11" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1080, 810 )
+scale = Vector2( 0.825581, 0.744186 )
+
+[node name="SolidWall12" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1080, 990 )
+scale = Vector2( 0.825581, 0.744186 )
