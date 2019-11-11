@@ -1,7 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Scenes/NormalFloor.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/SolidWall.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/BuildingBlocks/NormalFloor.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/BuildingBlocks/SolidWall.tscn" type="PackedScene" id=2]
+
+
 
 [node name="Frame" type="Node2D"]
 
