@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 const GRAVITY = 5000
+const LIGHT_GRAVITY = 400
 const THETA = deg2rad(45)
 
 var acceleration
@@ -12,7 +13,7 @@ var wall
 var roof
 var falling
 var jump_after_bounce
-var jump
+var jumping
 
 var collision
 
@@ -26,6 +27,14 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	if jumping:
+		if velocity.y < 0 && !roof:
+			acceleration.y = - LIGHT_GRAVITY
+		else:
+			acceleration.y = 1.5 * LIGHT_GRAVITY
+	else:
+		acceleration.y = GRAVITY
+
 	if bounce:
 		# velocity = - velocity -- Does not work, Bouncy keeps bouncing higher than previously
 		velocity = Vector2(0, -1000)
@@ -36,7 +45,12 @@ func _physics_process(delta):
 
 		velocity.x = move_direction * direction *cos(THETA)
 		velocity.y = - direction * sin(THETA)
+		
+		if jumping:
+			jumping = false
+			jump_after_bounce = true
 		move = false
+		key_registered = false
 	elif wall:
 		# velocity = - velocity -- Same issue, Bouncy goes too far
 		velocity = - 0.79 * velocity
@@ -48,11 +62,6 @@ func _physics_process(delta):
 		velocity = acceleration
 		roof = false
 
-	if jump && velocity.y < 0:
-		acceleration.y = - abs(acceleration.y)
-	else:
-		acceleration.y = abs(acceleration.y)
-
 	collision = move_and_collide(velocity * delta)
 	velocity += acceleration * delta
 
@@ -60,20 +69,17 @@ func _physics_process(delta):
 		collide()
 
 func _input(event):
-	if key_registered:
-		pass
-
-	if event.is_action("ui_left") && !event.is_action_released("ui_left"):
+	if event.is_action("ui_left") && !event.is_action_released("ui_left") && !key_registered:
 		move_direction = -1
 		key_registered = true
-	elif event.is_action("ui_right") && !event.is_action_released("ui_right"):
+	elif event.is_action("ui_right") && !event.is_action_released("ui_right") && !key_registered:
 		move_direction = 1
 		key_registered = true
 	elif event.is_action_pressed("ui_accept"):
 		jump_after_bounce = true
 	elif event.is_action_released("ui_accept"):
 		jump_after_bounce = false
-		jump = false
+		jumping = false
 	elif event.is_action_pressed("ui_up"):
 		print(global_position)
 
@@ -82,20 +88,21 @@ func collide():
 	
 	if collision.collider.name == "BodyTop" and !key_registered and !jump_after_bounce:
 		bounce = true
-	elif collision.collider.name == "BodyTop" and !key_registered and jump_after_bounce:
+	elif collision.collider.name == "BodyTop" and jump_after_bounce:
+		velocity = Vector2()
 		jump_after_bounce = false
-		jump = true
+		jumping = true
 	elif collision.collider.name == "BodyTop" and key_registered:
 		move = true
-		key_registered = false
 	elif collision.collider.name == "SolidWall":
 		wall = true
 	elif collision.collider.name == "BodyBottom":
-		if jump:
-			jump = false
-			jump_after_bounce = true
 		roof = true
 
-func fall(center):
-	global_position.x = round(center)
-	falling = true
+func fall(space):
+	global_position.x = round(space.x)
+	if velocity.y > 0:
+		falling = true
+	elif key_registered:
+		global_position.y = round(space.y + 14)
+		move = true
