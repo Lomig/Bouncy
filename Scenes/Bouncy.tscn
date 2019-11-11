@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scripts/Bouncy.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Smiley.png" type="Texture" id=2]
-[ext_resource path="res://Sound/Jump.wav" type="AudioStream" id=3]
+[ext_resource path="res://Sound/Bounce.ogg" type="AudioStream" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 20.0
