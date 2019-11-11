@@ -15,8 +15,6 @@ var falling
 var jump_after_bounce
 var jumping
 
-var collision
-
 var key_registered
 var move_direction
 
@@ -25,8 +23,12 @@ func _ready():
 	acceleration = Vector2(0, GRAVITY)
 	velocity = Vector2()
 
+func _process(delta):
+	if global_position.y > 1080:
+		get_tree().reload_current_scene()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	# If jumping, decrease gravity to help aiming platforms
 	if jumping:
 		if velocity.y < 0 && !roof:
 			acceleration.y = - LIGHT_GRAVITY
@@ -39,6 +41,7 @@ func _physics_process(delta):
 		# velocity = - velocity -- Does not work, Bouncy keeps bouncing higher than previously
 		velocity = Vector2(0, -1000)
 		bounce = false
+	# Ballistics physic - Here is a nice parabola
 	elif move:
 		var cell_width = 169 # Should be 180 / Don't know why it works better
 		var direction = (cell_width / cos(THETA)) * sqrt(GRAVITY / (2 * (cell_width * tan(THETA))))
@@ -55,6 +58,7 @@ func _physics_process(delta):
 		# velocity = - velocity -- Same issue, Bouncy goes too far
 		velocity = - 0.79 * velocity
 		wall = false
+	# Once leaving EmptySpace, kill Vx for Bouncy to fall in the middle of the plateform
 	elif falling:
 		velocity.x = 0
 		falling = false
@@ -62,11 +66,12 @@ func _physics_process(delta):
 		velocity = acceleration
 		roof = false
 
-	collision = move_and_collide(velocity * delta)
+	# Euler integration
+	var collision = move_and_collide(velocity * delta)
 	velocity += acceleration * delta
 
 	if collision:
-		collide()
+		collide(collision)
 
 func _input(event):
 	if event.is_action("ui_left") && !event.is_action_released("ui_left") && !key_registered:
@@ -83,26 +88,38 @@ func _input(event):
 	elif event.is_action_pressed("ui_up"):
 		print(global_position)
 
-func collide():
-	global_position.x = round(global_position.x)
-	
+func collide(collision):
+	# Make sure Bouncy always bounce on the middle of the platform
+	if !collision.collider.name == "SolidWall":
+		global_position.x = round(collision.collider.global_position.x)
+
+	# If we collide with the floor while idle, bounce!
 	if collision.collider.name == "BodyTop" and !key_registered and !jump_after_bounce:
 		bounce = true
+	# If we collide with the floor preparing to jump, let's jump
 	elif collision.collider.name == "BodyTop" and jump_after_bounce:
 		velocity = Vector2()
 		jump_after_bounce = false
 		jumping = true
+	# If we collide with the foor and ready to move left/right, move
 	elif collision.collider.name == "BodyTop" and key_registered:
 		move = true
+	# Bounce of the wall
 	elif collision.collider.name == "SolidWall":
 		wall = true
+	# Bounce of the roof
 	elif collision.collider.name == "BodyBottom":
 		roof = true
 
+# To have a nice movement, we consider the absence of platform as a platform
+# No collision for Area2D, detection done on the area itself
+# This is the callback method
 func fall(space):
 	global_position.x = round(space.x)
+	# Falling...
 	if velocity.y > 0:
 		falling = true
+	# Jumping...
 	elif key_registered:
-		global_position.y = round(space.y + 14)
+		global_position.y = round(space.y + 14) # +14 - Hacky thing to target the middle of the next platform
 		move = true
