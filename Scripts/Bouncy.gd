@@ -95,6 +95,7 @@ func collide(collision):
 
 	# If we collide with the floor while idle, bounce!
 	if collision.collider.name == "BodyTop" and !key_registered and !jump_after_bounce:
+		$AudioBounce.play()
 		bounce = true
 	# If we collide with the floor preparing to jump, let's jump
 	elif collision.collider.name == "BodyTop" and jump_after_bounce:
@@ -103,6 +104,7 @@ func collide(collision):
 		jumping = true
 	# If we collide with the foor and ready to move left/right, move
 	elif collision.collider.name == "BodyTop" and key_registered:
+		$AudioBounce.play()
 		move = true
 	# Bounce of the wall
 	elif collision.collider.name == "SolidWall":
