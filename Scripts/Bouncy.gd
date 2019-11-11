@@ -89,6 +89,7 @@ func _input(event):
 		print(global_position)
 
 func collide(collision):
+
 	# Make sure Bouncy always bounce on the middle of the platform
 	if !collision.collider.name == "SolidWall":
 		global_position.x = round(collision.collider.global_position.x)
@@ -105,6 +106,7 @@ func collide(collision):
 	# If we collide with the foor and ready to move left/right, move
 	elif collision.collider.name == "BodyTop" and key_registered:
 		$AudioBounce.play()
+		collision.collider.get_parent().tilt(move_direction)
 		move = true
 	# Bounce of the wall
 	elif collision.collider.name == "SolidWall":
