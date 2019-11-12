@@ -126,10 +126,8 @@ func collide(collision):
 
 # To have a nice movement, we consider the absence of platform as a platform
 # No collision for Area2D, detection done on the area itself
-# This is the callback method
+# This is the callback method (signal)
 func fall(body, space):
-	if body != self: pass
-
 	global_position.x = round(space.x)
 	# Falling...
 	if velocity.y > 0:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Levels/Level01.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/BuildingBlocks/Exit.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Scenes/BuildingBlocks/EmptySpace.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Bouncy.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Collectibles/Gem.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Collectibles/Vial.tscn" type="PackedScene" id=8]
 
 [node name="Level01" type="Node2D"]
 script = ExtResource( 1 )
@@ -142,3 +143,9 @@ position = Vector2( 270, 680 )
 
 [node name="Gem6" parent="." instance=ExtResource( 7 )]
 position = Vector2( 990, 1040 )
+
+[node name="Vial" parent="." instance=ExtResource( 8 )]
+position = Vector2( 270, 140 )
+
+[node name="Vial" parent="Vial" instance=ExtResource( 8 )]
+position = Vector2( 540, 720 )
