@@ -1,0 +1,9 @@
+extends Node
+
+enum ENTITY_TYPES {
+	WALL,
+	FLOOR,
+	NOTHING,
+	COLLECTIBLE,
+	PLAYER
+}

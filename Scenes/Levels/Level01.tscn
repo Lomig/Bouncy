@@ -1,0 +1,144 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scenes/Levels/Level01.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/BuildingBlocks/Exit.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Frame.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/BuildingBlocks/NormalFloor.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/BuildingBlocks/EmptySpace.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Bouncy.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Collectibles/Gem.tscn" type="PackedScene" id=7]
+
+[node name="Level01" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Exit" parent="." instance=ExtResource( 2 )]
+visible = false
+position = Vector2( 90, 180 )
+
+[node name="Frame" parent="." instance=ExtResource( 3 )]
+
+[node name="NormalFloor" parent="." instance=ExtResource( 4 )]
+position = Vector2( 90, 180 )
+
+[node name="NormalFloor2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 270, 180 )
+
+[node name="NormalFloor3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 450, 180 )
+
+[node name="NormalFloor4" parent="." instance=ExtResource( 4 )]
+position = Vector2( 630, 180 )
+
+[node name="NormalFloor5" parent="." instance=ExtResource( 4 )]
+position = Vector2( 810, 180 )
+
+[node name="NormalFloor6" parent="." instance=ExtResource( 4 )]
+position = Vector2( 990, 360 )
+
+[node name="NormalFloor7" parent="." instance=ExtResource( 4 )]
+position = Vector2( 810, 360 )
+
+[node name="NormalFloor8" parent="." instance=ExtResource( 4 )]
+position = Vector2( 630, 360 )
+
+[node name="NormalFloor9" parent="." instance=ExtResource( 4 )]
+position = Vector2( 450, 360 )
+
+[node name="NormalFloor10" parent="." instance=ExtResource( 4 )]
+position = Vector2( 270, 360 )
+
+[node name="NormalFloor11" parent="." instance=ExtResource( 4 )]
+position = Vector2( 90, 540 )
+
+[node name="NormalFloor12" parent="." instance=ExtResource( 4 )]
+position = Vector2( 270, 540 )
+
+[node name="NormalFloor13" parent="." instance=ExtResource( 4 )]
+position = Vector2( 450, 540 )
+
+[node name="NormalFloor14" parent="." instance=ExtResource( 4 )]
+position = Vector2( 630, 540 )
+
+[node name="NormalFloor15" parent="." instance=ExtResource( 4 )]
+position = Vector2( 810, 540 )
+
+[node name="NormalFloor16" parent="." instance=ExtResource( 4 )]
+position = Vector2( 990, 720 )
+
+[node name="NormalFloor17" parent="." instance=ExtResource( 4 )]
+position = Vector2( 810, 720 )
+
+[node name="NormalFloor18" parent="." instance=ExtResource( 4 )]
+position = Vector2( 630, 720 )
+
+[node name="NormalFloor19" parent="." instance=ExtResource( 4 )]
+position = Vector2( 450, 720 )
+
+[node name="NormalFloor20" parent="." instance=ExtResource( 4 )]
+position = Vector2( 270, 720 )
+
+[node name="NormalFloor21" parent="." instance=ExtResource( 4 )]
+position = Vector2( 90, 900 )
+
+[node name="NormalFloor22" parent="." instance=ExtResource( 4 )]
+position = Vector2( 270, 900 )
+
+[node name="NormalFloor23" parent="." instance=ExtResource( 4 )]
+position = Vector2( 450, 900 )
+
+[node name="NormalFloor24" parent="." instance=ExtResource( 4 )]
+position = Vector2( 630, 900 )
+
+[node name="NormalFloor25" parent="." instance=ExtResource( 4 )]
+position = Vector2( 810, 900 )
+
+[node name="NormalFloor26" parent="." instance=ExtResource( 4 )]
+position = Vector2( 990, 1080 )
+
+[node name="NormalFloor27" parent="." instance=ExtResource( 4 )]
+position = Vector2( 270, 1080 )
+
+[node name="NormalFloor28" parent="." instance=ExtResource( 4 )]
+position = Vector2( 450, 1080 )
+
+[node name="NormalFloor29" parent="." instance=ExtResource( 4 )]
+position = Vector2( 630, 1080 )
+
+[node name="NormalFloor30" parent="." instance=ExtResource( 4 )]
+position = Vector2( 810, 1080 )
+
+[node name="EmptySpace" parent="." instance=ExtResource( 5 )]
+position = Vector2( 990, 160 )
+
+[node name="EmptySpace2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 90, 340 )
+
+[node name="EmptySpace3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 90, 700 )
+
+[node name="EmptySpace4" parent="." instance=ExtResource( 5 )]
+position = Vector2( 990, 880 )
+
+[node name="EmptySpace5" parent="." instance=ExtResource( 5 )]
+position = Vector2( 990, 520 )
+
+[node name="Bouncy" parent="." instance=ExtResource( 6 )]
+position = Vector2( 90, 80 )
+
+[node name="Gem" parent="." instance=ExtResource( 7 )]
+position = Vector2( 810, 140 )
+
+[node name="Gem2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 270, 320 )
+
+[node name="Gem3" parent="." instance=ExtResource( 7 )]
+position = Vector2( 810, 500 )
+
+[node name="Gem4" parent="." instance=ExtResource( 7 )]
+position = Vector2( 810, 680 )
+
+[node name="Gem5" parent="." instance=ExtResource( 7 )]
+position = Vector2( 270, 680 )
+
+[node name="Gem6" parent="." instance=ExtResource( 7 )]
+position = Vector2( 990, 1040 )
