@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/GreenGem.png-ae85cbb6b3d1264231bb4407785c7fd6.stex"
+path="res://.import/Gem3.png-16d5e682fe119e7a7b523c2d767e311a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Collectibles/GreenGem.png"
-dest_files=[ "res://.import/GreenGem.png-ae85cbb6b3d1264231bb4407785c7fd6.stex" ]
+source_file="res://Sprites/Collectibles/Gem3.png"
+dest_files=[ "res://.import/Gem3.png-16d5e682fe119e7a7b523c2d767e311a.stex" ]
 
 [params]
 
